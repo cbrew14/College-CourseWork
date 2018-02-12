@@ -1,3 +1,5 @@
+/*This was the final project for my Business Analytics Class*/ 
+
 #open csv files
 test <- read.csv('machine-testing.csv')
 train <- read.csv('machine-training.csv')
