@@ -1,0 +1,4 @@
+outcome = ifelse(train$classe=='A', 1, 0)
+
+#create ds from train
+ds = train[ , colSums(is.na(train)) < 9811]
