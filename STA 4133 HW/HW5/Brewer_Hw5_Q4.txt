@@ -1,0 +1,14 @@
+data sasdata.wide;
+set "\\Client\C$\wide.sas7bdat";
+run;
+data sasdata.Long (keep=subj time x y);
+  set sasdata.wide;
+  array _x x1-x5;
+  array _y y1-y5;
+  do time=1 to 5;
+    x=_x(time);
+    y=_y(time);
+    output;
+  end;
+run;
+

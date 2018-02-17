@@ -1,0 +1,6 @@
+data fun;
+do Integers = 1 to 100 until (Squares ge 100);
+Squares = Integers*Integers;
+output;
+end;
+run;

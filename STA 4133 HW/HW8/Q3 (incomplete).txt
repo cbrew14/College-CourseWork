@@ -1,0 +1,14 @@
+%let newint = integer_n;
+%let newsq = square_n;
+%let i = n;
+%let j = &i + 1;
+
+data test;
+If &newsq < 100 then
+do n = 1 to &j;
+	&newint = n;
+	&newsq = n*n;
+	output;
+else
+end;
+run;

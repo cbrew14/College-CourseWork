@@ -1,0 +1,15 @@
+data sasdata.bp;
+set "\\Client\C$\bloodpressure.sas7bdat";
+if Age<=40 then Age = 1;
+else if 40<Age<=60 then Age = 2;
+else if Age>=61 then Age = 3;
+format Age Agerange.;
+run;
+
+proc format;
+value AgeRange 1 = "40 or Younger" 2 = "41 to 60" 3 = "61 or older";
+run;
+
+proc freq data=sasdata.bp;
+tables Age/ Nocum;
+run;

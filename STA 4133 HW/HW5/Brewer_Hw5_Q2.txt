@@ -1,0 +1,6 @@
+Purchase = read.sas7bdat("purchase.sas7bdat")
+inventory = read.sas7bdat("inventory.sas7bdat")
+ds = merge(Purchase, inventory, all = T)
+Totat_Cost = ds$Quantity*ds$Price
+ds_2 = data.frame(ds, Totat_Cost)
+Pur_Price = na.omit(ds_2)

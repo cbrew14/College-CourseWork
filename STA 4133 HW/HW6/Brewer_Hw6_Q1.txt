@@ -1,0 +1,14 @@
+data sasdata.dates;
+infile datalines dlm='/' truncover;
+input @1 Subj $3. 
+	@4 DOB mmddyy10. 
+	@14 Visit DATE9.;
+	Age = yrdif(DOB, Visit, 'Actual');
+	format DOB Visit mmddyy10.;
+	format Age 10.; 
+datalines;
+00110/21/195011Nov2006 
+00201/02/195525May2005 
+00312/25/200525Dec2006
+;
+run;

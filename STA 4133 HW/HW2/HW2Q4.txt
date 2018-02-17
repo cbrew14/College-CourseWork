@@ -1,0 +1,3 @@
+install.packages("readxl")
+library("readxl", lib.loc="~/R/win-library/3.4")
+SOCCER = read_excel(path = 'soccer.xls', sheet = 1)

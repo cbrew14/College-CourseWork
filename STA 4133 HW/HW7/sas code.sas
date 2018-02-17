@@ -1,0 +1,12 @@
+data sasdata.psych;
+set "\\Client\C$\psych.sas7bdat";
+run;
+data sasdata.evaluate;
+set sasdata.psych;
+if n(of Ques1-Ques10) ge 7 then QuesAve=mean(of Ques1-Ques10);
+if n(of Score1-Score5) eq 5 then maxscore=max(of Score1-Score5);
+if n(of Score1-Score5) eq 5 then Minscore=min(of Score1-Score5);
+if n(of Score1-Score5) eq 5 then SecondHighest=largest(2,of Score1-Score5);
+if n(of maxscore) le 3 then ScoreAve=mean(3,of Score1-Score5); 
+Composit = ScoreAve + (10*QuesAve);
+run;

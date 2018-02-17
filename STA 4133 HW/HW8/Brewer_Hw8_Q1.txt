@@ -1,0 +1,4 @@
+bike = read.sas7bdat("bicycles.sas7bdat")
+road = subset(bike, bike$Model=="Road Bike" & bike$UnitCost>2500)
+Hybrids = subset(bike, bike$Model=="Hybrid" & bike$UnitCost>660)
+ds = merge(road, Hybrids, all=T)

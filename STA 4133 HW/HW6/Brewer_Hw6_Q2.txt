@@ -1,0 +1,14 @@
+	options yearcutoff=1910;
+data sasdata.Dates1910_2006;
+input @1 Date MMDDYY8.;
+format Date Date9.;
+datalines;
+01/01/11
+02/23/05
+03/15/15
+05/09/06
+;
+options yearcutoff=1920;
+run;
+proc print data=sasdata.Dates1910_2006 noobs;
+run;

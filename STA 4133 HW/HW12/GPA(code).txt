@@ -1,0 +1,15 @@
+Small = mean(college$GPA[college$SchoolSize=="S"], na.rm = TRUE)
+Medium = mean(college$GPA[college$SchoolSize=="M"], na.rm = TRUE)
+Large = mean(college$GPA[college$SchoolSize=="L"], na.rm = TRUE)
+
+df = data.frame(Small,Medium,Large)
+
+barplot(t(as.matrix(df)), 
+beside=TRUE, 
+horiz=FALSE, 
+col=c("skyblue","yellow","green"), 
+main="Average GPA by School Size", 
+xlab='School Size', 
+ylab="Avgerage GPA", 
+names.arg=c("Small", "Medium", "Large"),
+legend.text=c("3.39","3.54","3.61"))

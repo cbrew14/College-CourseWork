@@ -1,0 +1,7 @@
+%macro STATS(Dsn, Class, Vars);
+	title "Statistics from data set learn.bicycles";
+	proc means data=&Dsn n mean min max maxdec=1;
+	class &Class;
+	var &Vars;
+	run;
+%mend STATS;

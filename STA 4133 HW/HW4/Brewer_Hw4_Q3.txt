@@ -1,0 +1,9 @@
+health = read.sas7bdat("health.sas7bdat")
+Meters = health$Height*0.0254
+Kg = health$Weight/2.2
+BMI = Kg/(Meters^2)
+BMIRound = signif(BMI, digits = 2)
+BMITenth = signif(BMI, digits = 3)
+BMIGroup = round(BMI/5)*5
+BMITrunc = trunc(BMI)
+Final = data.frame(BMIRound, BMITenth, BMIGroup, BMITrunc)

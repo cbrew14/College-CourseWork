@@ -1,0 +1,1 @@
+write.csv(soccer, file ='soccer.csv' )

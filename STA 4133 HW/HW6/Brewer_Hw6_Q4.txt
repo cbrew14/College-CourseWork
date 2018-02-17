@@ -1,0 +1,15 @@
+data sasdata.Interval;
+set "\\Client\C$\medical.sas7bdat";
+Quarter = intck('qtr',"01jan2006"d,VisitDate);
+ReturnDate = intnx('week',VisitDate,5,'same');
+ReturnDate_2 = intnx('month',VisitDate,6,'same');
+format ReturnDate ReturnDate_2 mmddyy10.; 
+run;
+proc print data=sasdata.Interval;
+Id Patno;
+var VisitDate ReturnDate;
+run;
+proc print data=sasdata.Interval;
+Id Patno;
+var VisitDate ReturnDate_2;
+run;

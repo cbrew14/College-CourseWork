@@ -1,0 +1,21 @@
+ds = vitals
+ds$PulseGroup = with(ds, 
+	ifelse(ds$Age<50,
+			ifelse(ds$Pulse<70, "Low", "High"),
+			ifelse(ds$Pulse<74, "Low", "High")))
+	
+ds$SBPGroup = with(ds, 
+	ifelse(ds$Age<50,
+			ifelse(ds$SBP<130, "Low", "High"),
+			ifelse(ds$SBP<140, "Low", "High")))
+
+#if you want a merged data set
+NewVitals = ds
+
+#if you only want the new variables
+PulseGroup = ds$PulseGroup
+SBPGroup = ds$SBPGroup
+NewVitals = data.frame(PulseGroup, SBPGroup)
+
+#if you want to make it pretty because Age has an NA value
+NewVitals = na.omit(NewVitals)

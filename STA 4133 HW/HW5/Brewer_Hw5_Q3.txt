@@ -1,0 +1,3 @@
+Demographic = read.sas7bdat("demographic.sas7bdat")
+Survey_1 = read.sas7bdat("survey1.sas7bdat")
+ds = merge.data.frame(x=Demographic, y=Survey_1, by.x = 'ID', by.y = 'Subj')

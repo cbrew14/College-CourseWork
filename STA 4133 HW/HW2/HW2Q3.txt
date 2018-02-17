@@ -1,0 +1,7 @@
+DS = read.table('geocaching.txt')
+Name = paste(DS$V1,DS$V2)
+LongDeg = as.numeric(substr(DS$V3, 1, 2))
+LongMin = as.numeric(substr(DS$V3, 3, 8))
+LatDeg = as.numeric(substr(DS$V3, 9, 10))
+LatMin = as.numeric(substr(DS$V3, 11, 16))
+Cache = data.frame(Name, LongDeg, LongMin, LatDeg, LatMin)

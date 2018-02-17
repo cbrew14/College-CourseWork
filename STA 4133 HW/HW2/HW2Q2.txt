@@ -1,0 +1,4 @@
+Vote = read.csv('political.csv', sep = ',', header = FALSE)
+names(Vote) = c('State', 'Party', 'Age')
+as.character(Vote$State)
+as.character(Vote$Party)

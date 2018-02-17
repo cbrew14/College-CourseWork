@@ -1,0 +1,13 @@
+%let newvar = Sqrt_n;
+%let i = 1;
+%let j = 5;
+
+data test;
+do n = &i to &j; 
+ &newvar = sqrt(n); 
+output; 
+end; 
+run; 
+
+proc print data=test;
+run;

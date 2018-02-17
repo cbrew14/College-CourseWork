@@ -1,0 +1,7 @@
+data Sta4133.fitness;
+set "\\Client\C$\fitness.sas7bdat";
+run;
+
+proc gplot data=Sta4133.fitness;
+plot TimeMile*RestPulse;
+run; quit;

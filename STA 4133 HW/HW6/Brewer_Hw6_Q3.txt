@@ -1,0 +1,13 @@
+data sasdata.hosp;
+set "\\Client\C$\hosp.sas7bdat";
+AgeJan1=round(yrdif(Dob,"01jan2006"d,"actual"));
+AgeToday=round(yrdif(DOB,today(),"actual"));
+MonthDec = intck('month',admitdate,'31dec2007'd);
+MonthToday = intck('month',AdmitDate,today());
+run;
+proc print data=sasdata.hosp;
+Where AdmitDate < "15jul2002"d;
+run;
+proc print data=sasdata.hosp (OBS=20);
+var MonthDec MonthToday;
+run;

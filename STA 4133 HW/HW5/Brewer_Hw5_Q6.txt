@@ -1,0 +1,10 @@
+proc import datafile = "\\Client\C$\mixed_recs.txt" out=sasdata.recs dbms=dlm replace;
+delimiter=';';
+getnames = no;
+run;
+data sasdata.sales sasdata.inventory;
+set sasdata.recs;
+If(verify(trim(left(VAR1)),'0123456789')=0 
+Then Output sasdata.sales;
+Else Output sasdata.inventory;
+run;

@@ -1,0 +1,22 @@
+blood = read.sas7bdat("blood.sas7bdat")
+Gender = blood$Gender[blood$Gender=="Female" & blood$BloodType=="AB"]
+AB = blood$BloodType[blood$Gender=="Female" & blood$BloodType=="AB"]
+AgeGroup = blood$AgeGroup[blood$Gender=="Female" & blood$BloodType=="AB"]
+BloodType = blood$BloodType[blood$Gender=="Female" & blood$BloodType=="AB"]
+Subject = blood$Subject[blood$Gender=="Female" & blood$BloodType=="AB"]
+WBC = blood$WBC[blood$Gender=="Female" & blood$BloodType=="AB"]
+RBC = blood$RBC[blood$Gender=="Female" & blood$BloodType=="AB"]
+Chol = blood$Chol[blood$Gender=="Female" & blood$BloodType=="AB"]
+Combined = (0.001*WBC)+RBC
+Subset_A = data.frame(Gender,BloodType,AgeGroup,Subject,WBC,RBC,Chol,Combined)
+
+
+Gender_b = Subset_A$Gender[Subset_A$Combined>=14]
+BloodType_b = Subset_A$BloodType[Subset_A$Combined>=14]
+AgeGroup_b = Subset_A$AgeGroup[Subset_A$Combined>=14]
+Subject_b = Subset_A$Subject[Subset_A$Combined>=14]
+WBC_b = Subset_A$WBC[Subset_A$Combined>=14]
+RBC_b = Subset_A$RBC[Subset_A$Combined>=14]
+Chol_b = Subset_A$Chol[Subset_A$Combined>=14]
+Combined_b = Subset_A$Combined[Subset_A$Combined>=14]
+Subset_b = data.frame(Gender_b,BloodType_b,AgeGroup_b,Subject_b,WBC_b,RBC_b,Chol_b,Combined_b)

@@ -1,0 +1,6 @@
+#Cameron Brewer 10/10/2017
+
+WtKg = bpprob$weight / 2.2
+HtCm = bpprob$weight / 2.54
+AveBP = bpprob$DBP + (bpprob$SBP - bpprob$DBP)/3
+HtPolynomial = (2*(HtCm^2)) + (1.5*(HtCm^3))

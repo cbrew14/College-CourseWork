@@ -1,0 +1,7 @@
+#Cameron Brewer
+#11/15/2017
+#This program Creates a data set called Portfolio that contains stocks.txt and a new Variable called value that is equal to the stock price*number of shares for each stock owned
+ds = read.table('stocks.txt')
+names(ds) = c('Symbol', 'Price', 'Shares')
+Value = ds$Price * ds$Shares
+Portfolio = data.frame(ds, Value)

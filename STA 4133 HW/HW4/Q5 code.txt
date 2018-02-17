@@ -1,0 +1,26 @@
+data sasdata.ds;
+set "\\Client\C$\names_and_more.sas7bdat";
+Name = compbl(Name);
+Phone = compress(Phone,"",'p');
+test = compress(Height,'','kd');
+Feet = input(scan(test,1,''),8.);
+Inches = input(scan(test,2,''),?? 8.);
+FtToIn = 12*Feet;
+test2 = compress(Mixed,'','kd');
+first = input(scan(test2,1,''),8.);
+second = input(scan(test2,2,''),8.);
+third = substr(second,1,11);
+fourth = substr(second,12,12);
+fifth = third/fourth;
+array change _numeric_;
+	do over change;
+		if change=. then change=0;
+	end;
+HtInches = FtToIn + Inches;
+Price = first + fifth;
+format Price 8.3;
+run;
+
+proc print data=sasdata.ds;
+var Name Phone HtInches Price;
+run;

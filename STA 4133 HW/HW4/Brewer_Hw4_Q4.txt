@@ -1,0 +1,12 @@
+mixed = read.sas7bdat("mixed.sas7bdat")
+NameLow = tolower(mixed$Name)
+> simpleCap <- function(x) {
++     s <- strsplit(x, " ")[[1]]
++     paste(toupper(substring(s, 1,1)), substring(s, 2),
++           sep="", collapse=" ")
++ }
+Name = as.character(mixed$Name)
+NameProp = sapply(Name, simpleCap)
+AllNames = data.frame(NameLow, NameProp)
+
+There is no PROPCASE for R, so does this also count as NameHard?

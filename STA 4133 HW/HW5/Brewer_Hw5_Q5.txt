@@ -1,0 +1,14 @@
+data sasdata.Narrow;
+set "\\Client\C$\Narrow.sas7bdat";
+run;
+data sasdata.Stretch (keep=Subj S1-S5);
+  set sasdata.Narrow;
+  /*array S1 S2 S3 S4 S5;*/
+  If Time=1 Then S1=Score;
+  If Time=2 Then S2=Score;
+  If Time=3 Then S3=Score;
+  If Time=4 Then S4=Score;
+  If Time=5 Then S5=Score;
+ update sasdata.Stretch (obs=0) sasdata.Stretch;
+ by Subj;
+run;

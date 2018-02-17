@@ -1,0 +1,116 @@
+college = read.sas7bdat("college.sas7bdat")
+ClassRank = college$ClassRank
+GPA = college$GPA
+
+> summary(ClassRank)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  41.00   59.75   72.50   71.72   87.00  100.00      12 
+> length(ClassRank)
+[1] 100
+"so ClassRank has 88 non-missing values"
+
+> summary(GPA)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+   2.29    3.18    3.62    3.51    3.96    4.00       6 
+> length(GPA)
+[1] 100
+"so GPA has 94 non-missing values"
+
+gpa_male = college$GPA[college$Gender=='M']
+gpa_female = college$GPA[college$Gender=='F']
+gpa_Large = college$GPA[college$SchoolSize=="L"]
+gpa_medium = college$GPA[college$SchoolSize=="M"]
+gpa_small = college$GPA[college$SchoolSize=="S"]
+cr_male = college$ClassRank[college$Gender=='M']
+cr_female = college$ClassRank[college$Gender=='F']
+cr_Large = college$ClassRank[college$SchoolSize=="L"]
+cr_medium = college$ClassRank[college$SchoolSize=="M"]
+cr_small = college$ClassRank[college$SchoolSize=="S"]
+
+> summary(gpa_male)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  2.360   3.060   3.640   3.481   3.960   4.000       2 
+> length(gpa_male)
+[1] 40
+"so 38 non-missing values"
+
+> summary(gpa_female)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  2.290   3.270   3.620   3.530   3.917   4.000       4 
+> length(gpa_female)
+[1] 60
+"so 56 non-missing values"
+
+> summary(gpa_Large)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  2.980   3.440   3.610   3.609   3.868   4.000       2 
+> length(gpa_Large)
+[1] 18
+"so 16 non-missing values"
+
+> summary(gpa_medium)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  2.360   3.115   3.660   3.541   4.000   4.000       2 
+> length(gpa_medium)
+[1] 41
+"so 39 non-missing values"
+
+> summary(gpa_small)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  2.290   3.047   3.415   3.393   3.725   4.000       1 
+> length(gpa_small)
+[1] 37
+"so 36 non-missing values"
+
+> summary(cr_male)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  41.00   60.50   72.50   72.25   85.50  100.00       4 
+> length(cr_male)
+[1] 40
+"so 36 non-missing values"
+
+> summary(cr_female)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  42.00   59.75   72.50   71.35   87.00   99.00       8 
+> length(cr_female)
+[1] 60
+"so 52 non-missing values"
+
+> summary(cr_Large)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+   45.0    60.5    71.0    72.8    86.0    98.0       3 
+> length(cr_Large)
+[1] 18
+"so 15 non-missing values"
+
+> summary(cr_medium)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  42.00   55.00   70.50   69.58   81.50  100.00       3 
+> length(cr_medium)
+[1] 41
+"so 38 non-missing values"
+
+> summary(cr_small)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  41.00   62.00   79.00   74.58   89.00   99.00       6 
+> length(cr_small)
+[1] 37
+"so 31 non-missing values"
+
+bottom_half = college$GPA[college$ClassRank<=50]
+Quartile_3rd = college$GPA[college$ClassRank>50 & college$ClassRank<75]
+top_quartile = college$GPA[college$ClassRank>=75 & college$ClassRank<=100]
+
+> summary(bottom_half)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  2.990   3.708   3.925   3.779   4.000   4.000      13 
+> summary(Quartile_3rd)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  2.360   3.172   3.655   3.520   3.967   4.000      12 
+> summary(top_quartile)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  2.290   3.140   3.440   3.418   3.720   4.000      16 
+
+"Therefore, the mean GPA for the bottom half is 3.78, 
+the mean GPA for the 3rd Quartile is 3.52, 
+and the mean GPA for the Top Quartile 3.42"

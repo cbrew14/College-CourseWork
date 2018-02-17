@@ -1,0 +1,19 @@
+> lower = college$Scholarship[college$ClassRank<=70]
+> higher = college$Scholarship[college$ClassRank>70]
+
+> summary(higher)
+   N    Y NA's 
+  42    7   12 
+> summary(lower)
+   N    Y NA's 
+  35    4   12 
+
+final = matrix(c(4,35,39,7,42,49), ncol=2)
+> colnames(final)=c('70 and lower', '71 and higher')
+> rownames(final)=c('Yes','No','Total')
+> final.table=as.table(final)
+> final.table
+      70 and lower 71 and higher
+Yes              4             7
+No              35            42
+Total           39            49

@@ -1,0 +1,42 @@
+ds = voter
+ds[ds$Age<=30,]$Age = "0-30"
+ds[ds$Age<=50 & ds$Age>30,]$Age = "31-50"
+ds[ds$Age<=70 & ds$Age>50,]$Age = "51-70"
+ds[ds$Age>70,]$Age = "71+"
+
+
+ds$Party = as.character(ds$Party)
+ds[ds$Party=='D',]$Party = "Democrat"
+ds[ds$Party=='R',]$Party = "Republican"
+
+ds[ds$Ques1==1,]$Ques1 = "Strongly Disagree"
+ds[ds$Ques1==2,]$Ques1 = "Disagree"
+ds[ds$Ques1==3,]$Ques1 = "No Opinion"
+ds[ds$Ques1==4,]$Ques1 = "Agree"
+ds[ds$Ques1==5,]$Ques1 = "Strongly Agree"
+
+ds[ds$Ques2==1,]$Ques2 = "Strongly Disagree"
+ds[ds$Ques2==2,]$Ques2 = "Disagree"
+ds[ds$Ques2==3,]$Ques2 = "No Opinion"
+ds[ds$Ques2==4,]$Ques2 = "Agree"
+ds[ds$Ques2==5,]$Ques2 = "Strongly Agree"
+
+ds[ds$Ques3==1,]$Ques3 = "Strongly Disagree"
+ds[ds$Ques3==2,]$Ques3 = "Disagree"
+ds[ds$Ques3==3,]$Ques3 = "No Opinion"
+ds[ds$Ques3==4,]$Ques3 = "Agree"
+ds[ds$Ques3==5,]$Ques3 = "Strongly Agree"
+
+ds[ds$Ques4==1,]$Ques4 = "Strongly Disagree"
+ds[ds$Ques4==2,]$Ques4 = "Disagree"
+ds[ds$Ques4==3,]$Ques4 = "No Opinion"
+ds[ds$Ques4==4,]$Ques4 = "Agree"
+ds[ds$Ques4==5,]$Ques4 = "Strongly Agree"
+
+names(ds)[3]="The president is doing a good job"
+names(ds)[4]="Congress is doing a good job"
+names(ds)[5]="Taxes are too high"
+names(ds)[6]="Government should cut spending"
+
+ctrl-H, find"ds", replace all"voter"
+ds is shorter than voter, and it allows me to check my work to look back at voter

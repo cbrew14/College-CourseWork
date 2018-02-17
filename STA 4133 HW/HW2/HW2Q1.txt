@@ -1,0 +1,2 @@
+scores = read.table('scores.txt', na.strings = '.')
+names(scores) = c('Gender', 'English', 'History', 'Math', 'Science')

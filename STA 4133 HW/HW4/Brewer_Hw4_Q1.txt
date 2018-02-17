@@ -1,0 +1,9 @@
+data random;
+do i=1 to 1000;
+x=int(rand('uniform')*5)+1; 
+output;
+end;
+
+proc freq;
+tables x/missing;
+run;
