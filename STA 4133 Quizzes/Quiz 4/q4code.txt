@@ -1,0 +1,72 @@
+#Don't know why you'd want this, but I guess it can't hurt to include it
+proc import datafile="\\Client\C$\help.csv"
+out=help dbms=csv replace;
+delimiter=',';
+getnames=yes;
+axis1 minor=none;
+axis2 minor=none order=(5 to 60 by 13.625);
+axis3 minor=none order=(20, 40, 60);
+symbol1 i=sm65s v=circle color=black l=1 w=5;
+symbol2 i=sm65s v=triangle color=black l=2 w=5;
+run;
+proc gplot data=help;
+where female eq 1 and substance eq 'alcohol';
+plot indtot*cesd / vaxis=axis1 haxis=axis3;
+plot2 mcs*cesd / vaxis = axis2;
+run;
+quit;
+proc sgpanel data=help;
+panelby g1b substance / layout=lattice;
+pbspline x=cesd y=mcs;
+run; quit; 
+ods select censoredsummary survivalplot;
+proc lifetest data=help plots=s(test);
+time dayslink*linkstatus(0);
+strata treat;
+run;
+ods graphics on;
+ods select roccurve;
+proc logistic data=help descending plots(only)=roc;
+model g1b = cesd;
+run;
+ods graphics off; 
+proc sgscatter data=help;
+ where female eq 1;
+ matrix cesd mcs pcs i1 / diagonal=(histogram kernel);
+run; quit; 
+proc sgscatter data=help;
+ where female eq 1;
+ compare x = (cesd mcs pcs i1)
+ y = (cesd mcs pcs i1) / loess;
+run; quit;
+proc sgscatter data=help;
+matrix mcs pcs pss_fr drugrisk cesd indtot i1 sexrisk /
+ellipse=(alpha=.25) start=bottomleft
+markerattrs=(symbol=circlefilled size=4);
+run; quit;
+
+
+
+#R code
+scatterhist = function(x, y, xlab="x label", ylab="y label"){
+  zones=matrix(c(3,1,2,4), ncol=2, byrow=TRUE)
+  layout(zones, widths=c(4/5,1/5), heights=c(1/5,4/5))
+  par(mar=c(0,0,0,0))
+  plot(type="n",x=1, y =1, bty="n",xaxt="n", yaxt="n")
+  text(x=1,y=1,paste0("nobs = ",min(length(x), length(y))), cex
+       =1.8) 
+  xhist = hist(x, plot=FALSE)
+  yhist = hist(y, plot=FALSE)
+  top = max(c(xhist$counts, yhist$counts))
+  par(mar=c(3,3,1,1))
+  plot(x,y)
+  par(mar=c(0,3,1,1))
+  barplot(xhist$counts, axes=FALSE, ylim=c(0, top), space=0)
+  par(mar=c(3,0,1,1))
+  barplot(yhist$counts, axes=FALSE, xlim=c(0, top), space=0,
+          horiz=TRUE)
+  par(oma=c(3,3,0,0))
+  mtext(xlab, side=1, line=1, outer=TRUE, adj=0,
+        at=.8 * (mean(x) - min(x))/(max(x)-min(x)))
+  mtext(ylab, side=2, line=1, outer=TRUE, adj=0,
+        at=(.8 * (mean(y) - min(y))/(max(y) - min(y)))) } 

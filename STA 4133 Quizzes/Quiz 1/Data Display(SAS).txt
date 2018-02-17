@@ -1,0 +1,7 @@
+proc print data=ds (OBS=10);
+var cesd;
+run;
+
+proc print data=ds;
+Where cesd>56;
+run;

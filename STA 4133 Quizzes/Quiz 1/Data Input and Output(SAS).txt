@@ -1,0 +1,24 @@
+proc import datafile='\\Client\C$\help.csv'
+out=help dbms=csv replace;
+delimiter=',';
+getnames=yes;
+run;
+
+data ds;
+retain cesd female i1 i2 id treat f1a f1b f1c f1d f1e f1f f1g f1h f1i f1j f1k f1l f1m f1n f1o f1p f1q f1r f1s f1t;
+set help; 
+keep cesd female i1 i2 id treat f1a f1b f1c f1d f1e f1f f1g f1h f1i f1j f1k f1l f1m f1n f1o f1p f1q f1r f1s f1t;
+run;
+
+proc means data=ds;
+run;
+
+proc contents data=ds;
+run;
+
+proc print data=ds (OBS = 5);
+run;
+
+proc export data=ds outfile="\\Client\C$\Users\ccbre\Documents\Homework\STA4133\Quiz 1\data.csv"
+	dbms=csv;
+run;

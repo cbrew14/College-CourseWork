@@ -1,0 +1,42 @@
+%macro flip_this(var);
+	select(&var);
+	when (0) &var=3;
+	when (1) &var=2;
+	when (2) &var=1;
+	when (3) &var=0; 
+	otherwise;
+	end; 
+%mend flip_this;
+
+data ds;
+set ds; 
+	%flip_this(f1d);
+	%flip_this(f1h);
+	%flip_this(f1l);
+	%flip_this(f1p);
+newcesd = SUM(f1a,f1b,f1c,f1d,f1e,f1f,f1g,f1h,f1i,f1j,f1k,f1l,f1m,f1n,f1o,f1p,f1q,f1r,f1s,f1t);
+array vars(20) f1a f1b f1c f1d f1e f1f f1g f1h f1i f1j f1k f1l f1m f1n f1o f1p f1q f1r f1s f1t;
+nmisscesd = cmiss(of vars[*]);
+imputemeancesd = Mean(f1a,f1b,f1c,f1d,f1e,f1f,f1g,f1h,f1i,f1j,f1k,f1l,f1m,f1n,f1o,f1p,f1q,f1r,f1s,f1t)*20;
+if i1=0 then drinkstat = 'abstinent';
+if female=1 & i1>0 & i1<=1 & i2<=3 then drinkstat='moderate';
+if female=0 & i1>0 & i1<=2 & i2<=4 then drinkstat='moderate';
+if female=1 & (i1>1 or i2>3) then drinkstat = 'highrisk';
+if  female=0 & (i1>2 or i2>4) then drinkstat = 'highrisk';
+run;
+
+/*proc print data=ds;
+id newcesd;
+var f1a f1b f1c f1d f1e f1f f1g f1h f1i f1j f1k f1l f1m f1n f1o f1p f1q f1r f1s f1t;
+run;*/
+
+proc print data=ds (OBS=20);
+Where nmisscesd > 0;
+var cesd newcesd nmisscesd imputemeancesd;
+run;
+
+proc print data=ds (firstobs=365 obs=370);
+var i1 i2 female drinkstat;
+run;
+
+

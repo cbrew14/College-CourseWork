@@ -1,0 +1,7 @@
+proc sort data= ds;
+by cesd drinkstat;
+run;
+
+proc print data=ds (OBS=5);
+var id cesd i1;
+run;
