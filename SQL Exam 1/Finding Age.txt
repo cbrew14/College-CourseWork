@@ -1,0 +1,37 @@
+/*SELECT date('now','localtime')*/
+/*CASE WHEN substr(t1.Birthdate,1,2)<strftime('%m','now','localtime') THEN AGE+1 */
+
+SELECT 
+t1.BusinessEntityID, 
+CASE WHEN substr(t1.Birthdate,1,2)<strftime('%m','now','localtime') 
+THEN (date('now','localtime') - 
+(substr(t1.Birthdate,7,4)||'-'||
+substr(t1.Birthdate,1,2)||'-'||
+substr(t1.Birthdate,4,2)))+1 
+WHEN (substr(t1.Birthdate,1,2)=strftime('%m','now','localtime') AND substr(t1.Birthdate,4,2)<=strftime('%d','now','localtime'))
+THEN (date('now','localtime') - 
+(substr(t1.Birthdate,7,4)||'-'||
+substr(t1.Birthdate,1,2)||'-'||
+substr(t1.Birthdate,4,2)))+1 
+ELSE (date('now','localtime') - 
+(substr(t1.Birthdate,7,4)||'-'||
+substr(t1.Birthdate,1,2)||'-'||
+substr(t1.Birthdate,4,2))) 
+END as AGE
+From Person t1
+Where Birthdate!=''
+limit 20;
+
+
+
+
+
+
+
+(date('now','localtime') - 
+(substr(t1.Birthdate,7,4)||'-'||
+substr(t1.Birthdate,1,2)||'-'||
+substr(t1.Birthdate,4,2))) as AGE
+From Person t1
+Where Birthdate!=''
+limit 5;

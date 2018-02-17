@@ -1,0 +1,32 @@
+Select 
+t2.CustomerID as ID, t2.AccountNumber as Account, t4.EmailAddress as Email,
+CASE WHEN substr(t1.Birthdate,1,2)<strftime('%m','now','localtime') 
+THEN (date('now','localtime') - 
+(substr(t1.Birthdate,7,4)||'-'||
+substr(t1.Birthdate,1,2)||'-'||
+substr(t1.Birthdate,4,2)))+1 
+WHEN (substr(t1.Birthdate,1,2)=strftime('%m','now','localtime') AND substr(t1.Birthdate,4,2)<=strftime('%d','now','localtime'))
+THEN (date('now','localtime') - 
+(substr(t1.Birthdate,7,4)||'-'||
+substr(t1.Birthdate,1,2)||'-'||
+substr(t1.Birthdate,4,2)))+1 
+ELSE (date('now','localtime') - 
+(substr(t1.Birthdate,7,4)||'-'||
+substr(t1.Birthdate,1,2)||'-'||
+substr(t1.Birthdate,4,2))) 
+END as AGE,
+t1.CommuteDistance as Commute, t1.Education, t1.Occupation, t1.Gender, 
+t1.HomeOwnerFlag as Flag, t1.MaritalStatus as Married, 
+t1.NumberCarsOwned as Cars, t1.NumberChildrenAtHome as HomeChild, 
+t1.TotalChildren as TotalChild, t1.YearlyIncome as Income,
+t3.Name as Territory,
+CASE WHEN t1.TotalPurchaseYTD>1000
+THEN 1 ELSE 0 END as YTD
+From Person t1
+JOIN Customer t2 ON t1.BusinessEntityID=t2.personID
+JOIN SalesTerritory t3 ON t2.TerritoryID=t3.TerritoryID
+JOIN EmailAddress t4 ON t1.BusinessEntityID=t4.BusinessEntityID
+Where Birthdate!=''
+limit 20;
+
+

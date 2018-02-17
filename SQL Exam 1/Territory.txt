@@ -1,0 +1,6 @@
+Select
+(t2.CustomerID,
+t3.Name
+From Customer t2
+Join SalesTerritory t3
+ON t2.TerritoryID=t3.TerritoryID);
